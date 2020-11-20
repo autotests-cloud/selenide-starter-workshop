@@ -1,15 +1,13 @@
 package guru.qa.selenide.starter;
 
-import com.codeborne.selenide.Condition;
-import com.codeborne.selenide.Selenide;
-import com.codeborne.selenide.WebDriverRunner;
-import org.junit.jupiter.api.Test;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.interactions.Actions;
+import com.codeborne.selenide.*;
+import guru.qa.selenide.starter.widgetobjects.InfoBlock;
+import org.junit.jupiter.api.*;
+import org.openqa.selenium.Cookie;
+
 
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selectors.*;
 import static com.codeborne.selenide.Selectors.byText;
 import static com.codeborne.selenide.Selenide.*;
 
@@ -17,6 +15,8 @@ public class TinkoffTest {
 
   @Test
   void checkDeposits(){
+
+
     open("https://tinkoff.ru");
     $(byText("Вклады")).closest("a").click();
 
@@ -48,5 +48,37 @@ public class TinkoffTest {
     // assert
 
   }
+
+  @Test
+  void asserts(){
+
+    String webtoken="";
+    open("site.com/404.html");
+    WebDriverRunner.getWebDriver().manage().addCookie(new Cookie("webtoken",webtoken));
+    open("site.com");
+
+    Configuration.headless=true;
+
+    open("http://","dad","ad","asd");
+    $("div").shouldBe(visible);
+    String text= $("div").getText();
+
+    int number=$$("div").size();
+    $("#filter").$$("[data-widget-name=CatalogCard]").shouldHaveSize(5);
+
+    $$(withText("Побед"));
+
+    new InfoBlock("#pobedaplus").getDetails();
+
+
+/*
+    new DepositsMenu().chooseOnlineOrder("Ипотека");
+    new DepositsMenu().startSearch();
+    new DepositsMenu().goToOnlineBanking();
+*/
+
+    Selenide.closeWebDriver();
+  }
+
 
 }

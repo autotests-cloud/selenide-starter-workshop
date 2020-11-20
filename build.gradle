@@ -18,7 +18,7 @@ sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
 dependencies {
-    testImplementation("com.codeborne:selenide:5.11.1")
+    testImplementation("com.codeborne:selenide:5.15.1")
     testImplementation("io.qameta.allure:allure-selenide:2.13.3")
     testImplementation("org.slf4j:slf4j-simple:1.7.29")
     // JUnit 5
